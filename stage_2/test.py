@@ -19,7 +19,6 @@ from detectron2.config import get_cfg
 from detectron2.engine import DefaultPredictor
 
 OUTPUT_NAME = "output_stage2"
-DRAW_PREDICTIONS = False
 
 def draw_bbox(myfile, bboxes, filename):
     """
@@ -42,7 +41,7 @@ def draw_bbox(myfile, bboxes, filename):
         ax.add_patch(rect)
 
     # Read image in grayscale mode
-    original_img = np.array(Image.fromarray(cv2.imread(myfile, cv2.IMREAD_GRAYSCALE)))
+    original_img = np.array(Image.fromarray(myfile))
     # Display the image
     ax.imshow(original_img, cmap = plt.cm.gray)
 
@@ -169,6 +168,8 @@ def main():
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
     predictor = DefaultPredictor(cfg)
 
+    draw_data = False
+
     # An example on how to use zipfile
     zip_file = zipfile.ZipFile("datasets/test/images.zip")
 
@@ -191,8 +192,8 @@ def main():
 
                 if predictions is not None:
                     # Draw predictions
-                    if DRAW_PREDICTIONS:
-                        draw_bbox(name, predictions["bboxes_window"], filename)
+                    if draw_data:
+                        draw_bbox(im, predictions["bboxes_window"] + predictions["bboxes_door"], filename)
 
                     # Save the data to the list
                     rows_list.append(predictions)

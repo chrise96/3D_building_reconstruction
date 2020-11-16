@@ -38,12 +38,12 @@ In this repository, a method is presented to automatically enhance Level Of Deta
 ---
 
 ## Dataset
-For this project, the City of Amsterdam annotated over 980 high-quality segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is available here: 
-**TODO**
+For this project, the City of Amsterdam annotated over 980 high-quality segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is available here: **TODO**
 
 
 ---
 
+## Installation
 Clone this repository:
 
 ```

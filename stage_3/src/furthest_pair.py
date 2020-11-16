@@ -1,16 +1,14 @@
-from __future__ import generators # TODO remove
-
 def orientation(p, q, r):
     """Return positive if p-q-r are clockwise, neg if ccw, zero if colinear."""
     return (q[1] - p[1]) * (r[0] - p[0]) - (q[0] - p[0]) * (r[1] - p[1])
 
 
-def hulls(Points):
+def hulls(points):
     """Graham scan to find upper & lower convex hulls of a set of 2d points."""
     U = []
     L = []
-    Points.sort()
-    for p in Points:
+    points.sort()
+    for p in points:
         while len(U) > 1 and orientation(U[-2], U[-1], p) <= 0:
             U.pop()
         while len(L) > 1 and orientation(L[-2], L[-1], p) >= 0:
@@ -20,13 +18,13 @@ def hulls(Points):
     return U, L
 
 
-def rotatingCalipers(Points):
+def rotating_calipers(points):
     """Find all ways of sandwiching between parallel lines.
     Given a list of 2d points, finds all ways of sandwiching the points
     between two parallel lines that touch one point each, and
     yields the sequence of pairs of points touched by each pair of lines.
     """
-    U, L = hulls(Points)
+    U, L = hulls(points)
     i = 0
     j = len(L) - 1
     while i < len(U) - 1 or j > 0:
@@ -46,8 +44,8 @@ def rotatingCalipers(Points):
             j -= 1
 
 
-def diameter(Points):
+def diameter(points):
     """Given a list of 2d points, returns the pair that's farthest apart."""
     diam, pair = max([((p[0] - q[0])**2 + (p[1] - q[1])**2, [p, q])
-                      for p, q in rotatingCalipers(Points)])
+                      for p, q in rotating_calipers(points)])
     return pair

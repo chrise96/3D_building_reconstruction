@@ -28,16 +28,18 @@ def main():
 
     images = []
     for data in os.listdir(IMAGES_PATH):
-        filename = os.path.splitext(data)[0]
-        if filename.endswith(".jpeg"):
+        if data.endswith(".jpeg"):
+            filename = os.path.splitext(data)[0]
             images.append(filename)
 
-    df_output = df[df["texture_filename"].isin(files)].reset_index()
+    #print(os.listdir(IMAGES_PATH))
+
+    df_output = df[df["texture_filename"].isin(images)].reset_index()
 
     # Save the filtered file
     filtered_df = df_output[["pand_id", "visible_point_one", "visible_point_two", "texture_filename"]]
     compression_opts = dict(method="zip", archive_name=OUTPUT_NAME + ".csv")
-    filtered_df.to_csv(OUTPUT_NAME + "facade_textures_filtered.csv", index=False, 
+    filtered_df.to_csv(OUTPUT_NAME + ".zip", index=False, 
         compression=compression_opts)
 
     print("--- %s seconds ---" % (time.time() - start_time))
