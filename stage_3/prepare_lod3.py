@@ -95,7 +95,6 @@ def get_facade_height(root, df):
                     # And outlier removal
                     if high_z <= IMAGE_HEIGHT_IRL and low_z > MIN_NAP:
                         # Save the info
-                        height_dict["pand_id"] = pand_id.text
                         height_dict["high_z"] = high_z
                         height_dict["low_z"] = low_z
                         height_dict["texture_filename"] = df_row["texture_filename"].values[0]

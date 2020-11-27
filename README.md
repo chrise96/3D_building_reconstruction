@@ -37,23 +37,37 @@ In this repository, a method is presented to automatically enhance Level Of Deta
 
 ---
 
-## Dataset
-For this project, the City of Amsterdam annotated over 980 high-quality segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is available here: **TODO**
+## Datasets
+### Amsterdam DataPunt
+[APIs](https://api.data.amsterdam.nl/) (Open Data and internal) offered by Amsterdam Data en Informatie.
 
+### Dataset of façade images by City of Amsterdam
+For this project, the City of Amsterdam annotated over 980 segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is split into train and val folders with two corresponding JSON files in the MS COCO format. The dataset is available here: **TODO**
+
+### 3D Amsterdam
+The [3D Amsterdam city model](https://3d.amsterdam.nl/) was published in 2019 as open data and contains information about every registered building in Amsterdam, as well as streets and trees. The city model consists of LOD2 style buildings in the standard CityGML or CityJSON format. It uses the Rijksdriehoek Coordinate System (EPSG:28992) and the Normaal Amsterdams Peil height system. 
 
 ---
 
 ## Installation
-Clone this repository:
+1. Clone this repository:
 
-```
-git clone https://github.com/chrise96/3D_building_reconstruction.git
-```
-Install all dependencies:
+    ```
+    git clone https://github.com/chrise96/3D_building_reconstruction.git
+    ```
 
-```
-pip install -r requirements.txt
-```
+2. Install the dependencies:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+    And install GDAL and scikit-geometry. Available as a conda package or a system install but not in pip:
+
+    ```
+    conda install -c conda-forge gdal=2.4.2
+    conda install -c conda-forge scikit-geometry
+    ```
 
 
 ---
@@ -61,11 +75,11 @@ pip install -r requirements.txt
 ## Design choices
 - The accuracy of the GNSS/INS sensor values is an important factor that significantly affects the quality of the 
 determined texture region of a building. Pose (location and orientation) optimization techniques can be used in future work to further 
-improve the quality of façade texture images during the extraction process. For now, validate the quality of the extracted facade texture images, manually remove invalid ones and run:
+improve the quality of façade texture images during the extraction process. For now, validate the quality of the extracted façade texture images, manually remove invalid ones and run:
 
       cd stage_1
       python3 -m scripts.filter_images
-- The system treat each wall as though it is 30 meters tall. Accordingly, the visual content is partly cut off when buildings are above 30 meter. Also, the system omits buildings with an area size of 400 m2 or larger, which is calculated using the building footprint data provided by BAG. Large buildings often impose badly distorted rectification results.
+- The system treats each wall as though it is 30 meters tall. Accordingly, the visual content is partly cut off when buildings are above 30 meter. Also, the system omits buildings with an area size of 400 m2 or larger, which is calculated using the building footprint data provided by BAG. Large buildings often impose badly distorted rectification results.
 - An optional step is performed on invalid CityGML files to remove duplicate buildings and keep unique ones.
 
 

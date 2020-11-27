@@ -32,8 +32,6 @@ def main():
             filename = os.path.splitext(data)[0]
             images.append(filename)
 
-    #print(os.listdir(IMAGES_PATH))
-
     df_output = df[df["texture_filename"].isin(images)].reset_index()
 
     # Save the filtered file

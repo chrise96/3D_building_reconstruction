@@ -19,6 +19,7 @@ from detectron2.config import get_cfg
 from detectron2.engine import DefaultPredictor
 
 OUTPUT_NAME = "output_stage2"
+DRAW_PREDICTIONS = False
 
 def draw_bbox(myfile, bboxes, filename):
     """
@@ -168,8 +169,6 @@ def main():
     cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
     predictor = DefaultPredictor(cfg)
 
-    draw_data = False
-
     # An example on how to use zipfile
     zip_file = zipfile.ZipFile("datasets/test/images.zip")
 
@@ -192,7 +191,7 @@ def main():
 
                 if predictions is not None:
                     # Draw predictions
-                    if draw_data:
+                    if DRAW_PREDICTIONS:
                         draw_bbox(im, predictions["bboxes_window"] + predictions["bboxes_door"], filename)
 
                     # Save the data to the list

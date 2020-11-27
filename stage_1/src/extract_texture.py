@@ -1,3 +1,8 @@
+"""
+Previous work by the City of Amsterdam:
+https://github.com/Amsterdam/panorama-textures/
+"""
+
 from math import atan2, pi
 from PIL import Image
 from numpy import linspace, float64, meshgrid, full, int32

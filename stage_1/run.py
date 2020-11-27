@@ -67,7 +67,7 @@ def get_visible_building_edges(pano_ids, facade_data):
         building_polygons = get_admissible_data(observer, building_polygons)
 
         if not building_polygons:
-            print("No admissible building polygons in range. Go to the next panorama")
+            #print("No admissible building polygons in range. Go to the next panorama")
             continue
 
         # Generate the outlines of the arrangement
