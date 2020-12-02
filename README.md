@@ -42,10 +42,18 @@ In this repository, a method is presented to automatically enhance Level Of Deta
 [APIs](https://api.data.amsterdam.nl/) (Open Data and internal) offered by Amsterdam Data en Informatie.
 
 ### Dataset of façade images by City of Amsterdam
-For this project, the City of Amsterdam annotated over 980 segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is split into train and val folders with two corresponding JSON files in the MS COCO format. The dataset is available here: **TODO**
+For this project, the City of Amsterdam annotated over 980 segmentation mask images for training the network. Regions in Amsterdam North and West are considered with diverse architectural style buildings, to ensure the robustness and the generalization of the network. The images were manually annotated with three classes (i.e. door, window, sky) by outlining their masks and adding corresponding class labels. The dataset is split into train and val folders with two corresponding JSON files in the MS COCO format. The dataset is available here: https://drive.google.com/file/d/1Mi9cpC8Q10OVRSz13ohaBC0AYzd07u9K/view
 
 ### 3D Amsterdam
 The [3D Amsterdam city model](https://3d.amsterdam.nl/) was published in 2019 as open data and contains information about every registered building in Amsterdam, as well as streets and trees. The city model consists of LOD2 style buildings in the standard CityGML or CityJSON format. It uses the Rijksdriehoek Coordinate System (EPSG:28992) and the Normaal Amsterdams Peil height system. 
+
+
+---
+
+## Windows and doors in 3D Amsterdam
+A screenshot of a virtual street scene in LOD3 is given below to demonstrate the enhancement results on a street-level. Visualized with Azul CityGML viewer.
+
+![](lod3_result.png)
 
 ---
 
@@ -72,7 +80,7 @@ The [3D Amsterdam city model](https://3d.amsterdam.nl/) was published in 2019 as
 
 ---
 
-## Design choices
+## Notes
 - The accuracy of the GNSS/INS sensor values is an important factor that significantly affects the quality of the 
 determined texture region of a building. Pose (location and orientation) optimization techniques can be used in future work to further 
 improve the quality of façade texture images during the extraction process. For now, validate the quality of the extracted façade texture images, manually remove invalid ones and run:
@@ -81,10 +89,6 @@ improve the quality of façade texture images during the extraction process. For
       python3 -m scripts.filter_images
 - The system treats each wall as though it is 30 meters tall. Accordingly, the visual content is partly cut off when buildings are above 30 meter. Also, the system omits buildings with an area size of 400 m2 or larger, which is calculated using the building footprint data provided by BAG. Large buildings often impose badly distorted rectification results.
 - An optional step is performed on invalid CityGML files to remove duplicate buildings and keep unique ones.
-
+- In the final stage of the pipeline, it often occurs that an opening geometry intersects with two or more exterior polygons (LOD2 wallsurface members). As interior polygons define openings in an exterior polygon, they have to be completely included in the area defined by the exterior polygon. In this case, a part of the intersecting opening geometry is simply placed over a wall surface and not propertly integrated into the building.
 
 ---
-
-## Citation
-If you use this code or data for your research, please cite the project:
- **TODO**
