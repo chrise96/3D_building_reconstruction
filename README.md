@@ -75,6 +75,7 @@ A screenshot of a virtual street scene in LOD3 is given below to demonstrate the
     ```
     conda install -c conda-forge gdal=2.4.2
     conda install -c conda-forge scikit-geometry
+    python -m pip install git+https://github.com/scikit-geometry/scikit-geometry.git
     ```
 
 
